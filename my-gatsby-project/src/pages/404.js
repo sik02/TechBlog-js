@@ -2,8 +2,7 @@ import * as React from "react"
 import { graphql } from "gatsby"
 
 
-const NotFoundPage = ({ data, location }) => {
-  const siteTitle = data.site.siteMetadata.title
+const NotFoundPage = ({ data}) => {
 
   return (
     <div>Test</div>
