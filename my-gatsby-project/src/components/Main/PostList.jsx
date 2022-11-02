@@ -2,16 +2,6 @@ import React from "react"
 import styled from "@emotion/styled"
 import PostItem from "./PostItem"
 
-const POST_ITEM_DATA = {
-  title: "Post Item Title",
-  date: "2020.01.29.",
-  categories: ["Web", "Frontend", "Testing"],
-  summary:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident repellat doloremque fugit quis rem temporibus! Maxime molestias, suntrem debitis odit harum impedit. Modi cupiditate harum dignissimos eos in corrupti!",
-  thumbnail:
-    "../../../contents/logo.jpg",
-  link: "<https://www.google.co.kr/>",
-}
 
 const PostListWrapper = styled.div`
   display: grid;
@@ -22,13 +12,12 @@ const PostListWrapper = styled.div`
   padding: 50px 0 100px;
 `
 
-const PostList = () => {
+const PostList = ({ posts }) => {
   return (
     <PostListWrapper>
-      <PostItem {...POST_ITEM_DATA} />
-      <PostItem {...POST_ITEM_DATA} />
-      <PostItem {...POST_ITEM_DATA} />
-      <PostItem {...POST_ITEM_DATA} />
+      {posts.map(({ node: { id, frontmatter } }) => (
+        <PostItem {...frontmatter} link="https://www.google.co.kr/" key={id} />
+      ))}
     </PostListWrapper>
   )
 }

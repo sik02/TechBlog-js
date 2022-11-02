@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "@emotion/styled"
 import { Link } from "gatsby"
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 const PostItemWrapper = styled(Link)`
   display: flex;
@@ -15,11 +16,10 @@ const PostItemWrapper = styled(Link)`
   }
 `
 
-const ThumbnailImage = styled.img`
+const ThumbnailImage = styled(GatsbyImage)`
   width: 100%;
   height: 200px;
   border-radius: 10px 10px 0 0;
-  object-fit: cover;
 `
 
 const PostItemContent = styled.div`
@@ -78,7 +78,7 @@ const Summary = styled.div`
   opacity: 0.8;
 `
 
-const PostItem = ({ title, date, categories, summary, thumbnail, link }) => {
+const PostItem = ({ title, date, categories, summary, link, thumbnail}) => {
   return (
     <PostItemWrapper to={link}>
       <ThumbnailImage src={thumbnail} alt="Post Item Image" />
