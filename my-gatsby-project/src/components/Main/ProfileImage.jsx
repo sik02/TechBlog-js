@@ -1,9 +1,8 @@
-import React from 'react'
-import styled from '@emotion/styled'
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
+import React from "react"
+import styled from "@emotion/styled"
+import { GatsbyImage } from "gatsby-plugin-image"
 
-import { graphql } from 'gatsby'
-
+import { graphql } from "gatsby"
 
 const ProfileImageWrapper = styled(GatsbyImage)`
   width: 120px;
@@ -16,7 +15,7 @@ const ProfileImageWrapper = styled(GatsbyImage)`
   }
 `
 
-const ProfileImage = ({profileImage}) => {
+const ProfileImage = ({ profileImage }) => {
   return <ProfileImageWrapper image={profileImage} alt="Profile Image" />
 }
 
@@ -44,10 +43,10 @@ export const getPostList = graphql`
         }
       }
     }
-    file(name: {eq: "profile-image"}) {
-        childImageSharp {
-          gatsbyImageData(width: 120, height: 120)
-        }
+    file(name: { eq: "profile-image" }) {
+      childImageSharp {
+        gatsbyImageData(width: 120, height: 120)
       }
+    }
   }
 `

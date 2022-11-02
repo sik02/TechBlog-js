@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useMemo } from "react"
 import styled from "@emotion/styled"
 import GlobalStyle from "../components/Common/GlobalStyle"
 import Introduction from "../components/Main/Introduction"
@@ -8,15 +8,7 @@ import PostList from "../components/Main/PostList"
 
 import { graphql } from "gatsby"
 
-import { IGatsbyImageData } from 'gatsby-plugin-image'
-
-
-
-const CATEGORY_LIST = {
-  All: 5,
-  Web: 3,
-  Mobile: 2,
-}
+import queryString from "query-string"
 
 const Container = styled.div`
   display: flex;
@@ -25,19 +17,55 @@ const Container = styled.div`
 `
 
 const IndexPage = ({
+  location: { search },
   data: {
     allMarkdownRemark: { edges },
     file: {
-        childImageSharp: {gatsbyImageData},
+      childImageSharp: { gatsbyImageData },
     },
   },
 }) => {
+  const parsed = queryString.parse(search)
+
+  const selectedCategory =
+    typeof parsed.category !== "string" || !parsed.category
+      ? "All"
+      : parsed.category
+
+  const categoryList = useMemo(
+    () =>
+      edges.reduce(
+        (
+          list,
+          {
+            node: {
+              frontmatter: { categories },
+            },
+          }
+        ) => {
+          categories.forEach(category => {
+            if (list[category] === undefined) list[category] = 1
+            else list[category]++
+          })
+
+          list["All"]++
+
+          return list
+        },
+        { All: 0 }
+      ),
+    []
+  )
+
   return (
     <Container>
       <GlobalStyle />
       <Introduction profileImage={gatsbyImageData} />
-      <CategoryList selectedCategory="Web" categoryList={CATEGORY_LIST} />
-      <PostList posts={edges} />
+      <CategoryList
+        selectedCategory={selectedCategory}
+        categoryList={categoryList}
+      />
+      <PostList selectedCategory={selectedCategory} posts={edges} />
       <Footer />
     </Container>
   )
@@ -67,10 +95,10 @@ export const getPostList = graphql`
         }
       }
     }
-    file(name: {eq: "profile-image"}) {
-        childImageSharp {
-          gatsbyImageData(width: 120, height: 120)
-        }
+    file(name: { eq: "profile-image" }) {
+      childImageSharp {
+        gatsbyImageData(width: 120, height: 120)
       }
+    }
   }
 `
