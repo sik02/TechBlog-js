@@ -3,7 +3,7 @@ date: '2022-10-24'
 title: 'Markdown 문서 작성 유튜브'
 categories: ['Markdown']
 summary: 'Markdown 문서 사용법 알아보기 유튜브 버전'
-thumbnail: './test.png'
+thumbnail: './test.jpg'
 ---
 
 

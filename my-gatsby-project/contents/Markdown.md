@@ -3,7 +3,7 @@ date: '2022-10-23'
 title: 'Markdown 문서 작성 방법'
 categories: ['Markdown']
 summary: 'Markdown 문서 사용법 알아보기'
-thumbnail: './test.png'
+thumbnail: './test.jpg'
 ---
 
 

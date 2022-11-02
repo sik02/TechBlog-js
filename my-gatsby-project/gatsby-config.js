@@ -18,7 +18,6 @@ module.exports = {
         path: `${__dirname}/static`,
       },
     },
-    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-transformer-remark`,
       options: {
@@ -61,7 +60,7 @@ module.exports = {
       resolve: `gatsby-plugin-sharp`,
       options: {
         defaults: {
-          formats: ['auto', 'webp'],
+          formats: ['auto', 'webp', 'jpg', 'png'],
           quality: 100,
           placeholder: 'blurred',
         }

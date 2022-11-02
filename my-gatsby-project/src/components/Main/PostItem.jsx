@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "@emotion/styled"
 import { Link } from "gatsby"
-import { GatsbyImage } from 'gatsby-plugin-image'
+import { GatsbyImage } from "gatsby-plugin-image"
 
 const PostItemWrapper = styled(Link)`
   display: flex;
@@ -78,10 +78,19 @@ const Summary = styled.div`
   opacity: 0.8;
 `
 
-const PostItem = ({ title, date, categories, summary, link, thumbnail}) => {
+const PostItem = ({
+  title,
+  date,
+  categories,
+  summary,
+  link,
+  thumbnail: {
+    childImageSharp: { gatsbyImageData },
+  },
+}) => {
   return (
     <PostItemWrapper to={link}>
-      <ThumbnailImage src={thumbnail} alt="Post Item Image" />
+      <ThumbnailImage image={gatsbyImageData} alt="Post Item Image" />
 
       <PostItemContent>
         <Title>{title}</Title>
@@ -98,3 +107,33 @@ const PostItem = ({ title, date, categories, summary, link, thumbnail}) => {
 }
 
 export default PostItem
+
+// export const getPostList = graphql`
+//   query getPostList {
+//     allMarkdownRemark(
+//       sort: { order: DESC, fields: [frontmatter___date, frontmatter___title] }
+//     ) {
+//       edges {
+//         node {
+//           id
+//           frontmatter {
+//             title
+//             summary
+//             date(formatString: "YYYY.MM.DD.")
+//             categories
+//             thumbnail {
+//               childImageSharp {
+//                 gatsbyImageData(width: 768, height: 400)
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//     file(name: { eq: "profile-image" }) {
+//       childImageSharp {
+//         gatsbyImageData(width: 120, height: 120)
+//       }
+//     }
+//   }
+// `

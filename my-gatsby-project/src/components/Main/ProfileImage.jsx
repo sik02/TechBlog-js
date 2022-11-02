@@ -2,6 +2,8 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 
+import { graphql } from 'gatsby'
+
 
 const ProfileImageWrapper = styled(GatsbyImage)`
   width: 120px;
@@ -33,7 +35,11 @@ export const getPostList = graphql`
             summary
             date(formatString: "YYYY.MM.DD.")
             categories
-            thumbnail
+            thumbnail {
+              childImageSharp {
+                gatsbyImageData(width: 768, height: 400)
+              }
+            }
           }
         }
       }
