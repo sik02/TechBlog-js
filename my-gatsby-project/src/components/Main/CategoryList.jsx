@@ -2,39 +2,50 @@ import React from "react"
 import styled from "@emotion/styled"
 import { Link } from "gatsby"
 
-
-const CategoryListWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 768px;
-  margin: 100px auto 0;
+const RelativeWrapper = styled.div`
+  position: relative;
 `
 
-const CategoryItem = styled(({ active, ...props }) => <Link {...props} />)`
-  margin-right: 20px;
-  padding: 5px 0;
-  font-size: 18px;
-  font-weight: ${({ active }) => (active ? "800" : "400")};
-  cursor: pointer;
+const AsideWrapper = styled.aside`
+  position: absolute;
+  left: 77%;
+  top: 30px;
+  width: 200px;
+  height: 100px;
+  font-size: 16px;
+`
 
-  &:last-of-type {
-    margin-right: 0;
-  }
+const SideTagList = styled.div`
+  margin-bottom: 25px;
+  font-weight: bold;
+  color: #fff;
+`
+
+const TagItem =  styled(({ active, ...props }) => (
+  <Link {...props} />
+))`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  color: #fff;
 `
 
 const CategoryList = ({ selectedCategory, categoryList }) => {
   return (
-    <CategoryListWrapper>
-      {Object.entries(categoryList).map(([name, count]) => (
-        <CategoryItem
-          to={`/?category=${name}`}
-          active={name === selectedCategory}
-          key={name}
-        >
-          #{name}({count})
-        </CategoryItem>
-      ))}
-    </CategoryListWrapper>
+    <RelativeWrapper>
+      <AsideWrapper>
+        <SideTagList>Tag List</SideTagList>
+            {Object.entries(categoryList).map(([name, count]) => (
+              <TagItem
+                to={`/?category=${name}`}
+                active={name === selectedCategory}
+                key={name}
+              >
+                {name} ({count})
+              </TagItem>
+            ))}  
+      </AsideWrapper>
+    </RelativeWrapper>
   )
 }
 
