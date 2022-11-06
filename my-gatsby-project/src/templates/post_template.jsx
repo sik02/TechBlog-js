@@ -21,15 +21,20 @@ const Post_template = ({
             summary,
             date,
             categories,
+            thumbnail: {
+              childImageSharp: {gatsbyImageData},
+              publicURL,
+            },
           },
         },
       } = edges[0]
   return (
-    <Template title={title} description={summary} url={href}>
+    <Template title={title} description={summary} url={href} image={publicURL}>
       <PostHead
         title={title}
         date={date}
         categories={categories}
+        thumbnail={gatsbyImageData}
       />
       <PostContent html={html} />
       <CommentWidget />
@@ -54,6 +59,7 @@ export const queryMarkdownDataBySlug = graphql`
               childImageSharp {
                 gatsbyImageData
               }
+              publicURL
             }
           }
         }

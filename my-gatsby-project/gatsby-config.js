@@ -71,7 +71,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-canonical-urls',
       options: {
-        siteUrl: 'https://www.naver.com',
+        siteUrl: 'http://localhost:3000',
         stripQueryString: true,
       },
     },
