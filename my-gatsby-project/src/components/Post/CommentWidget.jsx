@@ -22,8 +22,8 @@ const CommentWidget = function () {
     const attributes = {
       src,
       repo,
-      'issue-term': 'title',
-      label: 'Comment',
+      'issue-term': 'pathname',
+      label: 'comment',
       theme: `github-light`,
       crossorigin: 'anonymous',
       async: 'true',

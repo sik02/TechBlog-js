@@ -2,8 +2,6 @@ import React, { FunctionComponent } from "react"
 import styled from "@emotion/styled"
 import { Link } from "gatsby"
 
-import { CategoryItemProps, GatsbyLinkProps } from "../Main/PostItem"
-
 const PostHeadInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
