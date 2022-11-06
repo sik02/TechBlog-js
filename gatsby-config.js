@@ -71,7 +71,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-canonical-urls',
       options: {
-        siteUrl: 'http://localhost:3000',
+        siteUrl: 'https://sling-blog.netlify.app/',
         stripQueryString: true,
       },
     },
