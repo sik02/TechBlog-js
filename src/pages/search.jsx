@@ -4,59 +4,14 @@ import Template from "../components/Common/Template";
 import PostList from "../components/Main/PostList";
 import CategoryList from "../components/Main/CategoryList";
 import { graphql } from "gatsby";
-import queryString from "query-string";
 
-const SearchPage = ({
-  location: { search },
-  data: {
-    site: {
-      siteMetadata: { title, description, siteUrl },
-    },
-    allMarkdownRemark: { edges },
-    file: {
-      childImageSharp: { gatsbyImageData },
-      publicURL,
-    },
-  },
-}) => {
-  const parsed = queryString.parse(search);
+import SEO from "../components/SEO";
+import {title, description, siteUrl} from '../../site-meta-config'
 
-  const selectedCategory =
-    typeof parsed.category !== "string" || !parsed.category
-      ? "All"
-      : parsed.category;
-
-  const categoryList = useMemo(
-    () =>
-      edges.reduce(
-        (
-          list,
-          {
-            node: {
-              frontmatter: { categories },
-            },
-          }
-        ) => {
-          categories.forEach((category) => {
-            if (list[category] === undefined) list[category] = 1;
-            else list[category]++;
-          });
-
-          list["All"]++;
-
-          return list;
-        },
-        { All: 0 }
-      ),
-    []
-  );
+const Search = () => {
   return (
-    <Template
-      title={title}
-      description={description}
-      url={siteUrl}
-      image={publicURL}
-    >
+    <Template>
+      <SEO title={title} description={description} url={siteUrl} />
       <CategoryList
         selectedCategory={selectedCategory}
         categoryList={categoryList}
@@ -66,7 +21,7 @@ const SearchPage = ({
   );
 };
 
-export default SearchPage;
+export default Search;
 
 export const getPostList = graphql`
   query getPostList {
@@ -82,6 +37,7 @@ export const getPostList = graphql`
     ) {
       edges {
         node {
+          excerpt(pruneLength: 200)
           id
           fields {
             slug
