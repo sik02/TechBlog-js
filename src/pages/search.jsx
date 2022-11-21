@@ -1,23 +1,25 @@
 import React, { useMemo } from "react";
 
-import Template from "../components/Common/Template";
+// import Template from "../components/Common/Template";
 import PostList from "../components/Main/PostList";
 import CategoryList from "../components/Main/CategoryList";
 import { graphql } from "gatsby";
+
+import Layout from "../components/Layout";
 
 import SEO from "../components/SEO";
 import {title, description, siteUrl} from '../../site-meta-config'
 
 const Search = () => {
   return (
-    <Template>
-      <SEO title={title} description={description} url={siteUrl} />
+    <Layout>
+      {/* <SEO title={title} description={description} url={siteUrl} />
       <CategoryList
         selectedCategory={selectedCategory}
         categoryList={categoryList}
       />
-      <PostList selectedCategory={selectedCategory} posts={edges} />
-    </Template>
+      <PostList selectedCategory={selectedCategory} posts={edges} /> */}
+    </Layout>
   );
 };
 

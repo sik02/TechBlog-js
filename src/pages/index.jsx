@@ -5,7 +5,7 @@ import Introduction from "../components/Main/Introduction"
 
 import CategoryList from "../components/Main/CategoryList"
 import PostList from "../components/Main/PostList"
-import Template from "../components/Common/Template"
+import Layout from "../components/Layout"
 
 import { graphql } from "gatsby"
 
@@ -57,19 +57,21 @@ const IndexPage = ({
   )
 
   return (
-    <Template
-      title={title}
-      description={description}
-      url={siteUrl}
-      image={publicURL}
-    >
+    // <Template
+    //   title={title}
+    //   description={description}
+    //   url={siteUrl}
+    //   image={publicURL}
+    // >
+    <Layout>
       <Introduction profileImage={gatsbyImageData} />
       <CategoryList
         selectedCategory={selectedCategory}
         categoryList={categoryList}
       />
       <PostList selectedCategory={selectedCategory} posts={edges} />
-    </Template>
+      </Layout>
+    // </Template>
   )
 }
 

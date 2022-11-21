@@ -1,9 +1,11 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import Template from '../components/Common/Template'
+
 import PostHead from '../components/Post/PostHead'
 import PostContent from '../components/Post/PostContent'
 import CommentWidget from '../components/Post/CommentWidget'
+
+import Layout from '../components/Layout'
 
 
 
@@ -29,7 +31,8 @@ const Post_template = ({
         },
       } = edges[0]
   return (
-    <Template title={title} description={summary} url={href} image={publicURL}>
+    // <Template title={title} description={summary} url={href} image={publicURL}>
+    <Layout>
       <PostHead
         title={title}
         date={date}
@@ -38,7 +41,8 @@ const Post_template = ({
       />
       <PostContent html={html} />
       <CommentWidget />
-    </Template>
+      </Layout>
+    // </Template>
   )
 }
 
