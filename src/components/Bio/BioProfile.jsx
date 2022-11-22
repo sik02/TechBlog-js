@@ -2,7 +2,6 @@ import React from "react"
 import styled from "@emotion/styled"
 import { GatsbyImage } from "gatsby-plugin-image"
 
-import { graphql } from "gatsby"
 
 const ProfileImageWrapper = styled(GatsbyImage)`
   width: 120px;

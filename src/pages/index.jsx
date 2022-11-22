@@ -1,11 +1,12 @@
 import React, { useMemo } from "react";
 
-import CategoryList from "../components/Main/CategoryList";
-import PostList from "../components/Main/PostList";
+import PostList from "../components/PostList/PostList";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 
 import Bio from "../components/Bio/Bio";
+
+import SideTagList from "../components/SideTagList/SideTagList";
 
 import { graphql } from "gatsby";
 
@@ -19,7 +20,6 @@ const IndexPage = ({
     allMarkdownRemark: { edges },
     file: {
       childImageSharp: { gatsbyImageData },
-      publicURL,
     },
   },
 }) => {
@@ -59,7 +59,7 @@ const IndexPage = ({
     <Layout>
       <SEO title={title} description={description} url={siteUrl} />
       <Bio profileImage={gatsbyImageData} />
-      <CategoryList
+      <SideTagList
         selectedCategory={selectedCategory}
         categoryList={categoryList}
       />

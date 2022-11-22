@@ -1,24 +1,63 @@
 import React, { useMemo } from "react";
 
-// import Template from "../components/Common/Template";
-import PostList from "../components/Main/PostList";
-import CategoryList from "../components/Main/CategoryList";
+import PostList from "../components/PostList/PostList";
 import { graphql } from "gatsby";
 
+import SideTagList from "../components/SideTagList/SideTagList";
+
 import Layout from "../components/Layout";
-
 import SEO from "../components/SEO";
-import {title, description, siteUrl} from '../../site-meta-config'
 
-const Search = () => {
+import queryString from "query-string";
+
+
+import { title, description, siteUrl } from "../../site-meta-config";
+
+const Search = ({data, location}) => {
+
+  const search = location.search
+
+  const parsed = queryString.parse(search);
+
+  const edges = data.allMarkdownRemark.edges
+
+  const selectedCategory =
+    typeof parsed.category !== "string" || !parsed.category
+      ? "All"
+      : parsed.category;
+
+  const categoryList = useMemo(
+    () =>
+      edges.reduce(
+        (
+          list,
+          {
+            node: {
+              frontmatter: { categories },
+            },
+          }
+        ) => {
+          categories.forEach((category) => {
+            if (list[category] === undefined) list[category] = 1;
+            else list[category]++;
+          });
+
+          list["All"]++;
+
+          return list;
+        },
+        { All: 0 }
+      ),
+    []
+  );
   return (
     <Layout>
       <SEO title={title} description={description} url={siteUrl} />
-      {/* <CategoryList
+      <SideTagList
         selectedCategory={selectedCategory}
         categoryList={categoryList}
       />
-      <PostList selectedCategory={selectedCategory} posts={edges} /> */}
+      <PostList selectedCategory={selectedCategory} posts={edges} />
     </Layout>
   );
 };
