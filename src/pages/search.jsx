@@ -13,8 +13,8 @@ import {title, description, siteUrl} from '../../site-meta-config'
 const Search = () => {
   return (
     <Layout>
-      {/* <SEO title={title} description={description} url={siteUrl} />
-      <CategoryList
+      <SEO title={title} description={description} url={siteUrl} />
+      {/* <CategoryList
         selectedCategory={selectedCategory}
         categoryList={categoryList}
       />

@@ -1,23 +1,21 @@
-import React from 'react'
-import styled from '@emotion/styled'
-import ProfileImage from './ProfileImage'
+import React from "react";
+import styled from "@emotion/styled";
+import BioProfile from "./BioProfile";
 
-import { BsGithub } from 'react-icons/bs'
-import { FaInstagram } from 'react-icons/fa'
-import { FiMail } from 'react-icons/fi'
+import { BsGithub } from "react-icons/bs";
+import { FaInstagram } from "react-icons/fa";
+import { FiMail } from "react-icons/fi";
 
 const Background = styled.div`
   width: 100%;
-  /* background-image: linear-gradient(60deg, #29323c 0%, #485563 100%); */
   background: #35363a;
   color: #fff;
-`
+`;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* align-items: flex-start; */
   width: 768px;
   height: 260px;
   margin: 0 auto;
@@ -27,23 +25,23 @@ const Wrapper = styled.div`
     height: 300px;
     padding: 0 20px;
   }
-`
+`;
 const ProfileWrapper = styled.div`
   display: flex;
-`
+`;
 
 const LeftContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 const RightContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-left: 20px;
-`
+`;
 
 const SubTitle = styled.div`
   font-size: 30px;
@@ -53,7 +51,7 @@ const SubTitle = styled.div`
   @media (max-width: 768px) {
     font-size: 15px;
   }
-`
+`;
 
 const Title = styled.div`
   margin-top: 5px;
@@ -64,12 +62,12 @@ const Title = styled.div`
   @media (max-width: 768px) {
     font-size: 25px;
   }
-`
+`;
 
 const Icon = styled.div`
   margin-top: 10px;
   font-size: 20px;
-`
+`;
 
 const IconWrapper = styled.a`
   margin-left: 10px;
@@ -85,23 +83,23 @@ const IconWrapper = styled.a`
   &:first-of-type {
     margin-left: 0;
   }
-`
+`;
 
 const Line = styled.hr`
   width: 768px;
   margin: 0 auto;
   border: none;
   border-bottom: 1px solid #adb5bd;
-`
+`;
 
-const Introduction = ({ profileImage }) => {
+const Bio = ({ profileImage }) => {
   return (
     <>
       <Background>
         <Wrapper>
           <ProfileWrapper>
             <LeftContainer>
-              <ProfileImage profileImage={profileImage} />
+              <BioProfile profileImage={profileImage} />
             </LeftContainer>
             <RightContainer>
               <SubTitle>@ Sling</SubTitle>
@@ -123,7 +121,7 @@ const Introduction = ({ profileImage }) => {
       </Background>
       <Line />
     </>
-  )
-}
+  );
+};
 
-export default Introduction
+export default Bio;

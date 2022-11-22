@@ -1,37 +1,34 @@
-import React from 'react'
-import { graphql } from 'gatsby'
+import React from "react";
+import { graphql } from "gatsby";
 
-import PostHead from '../components/Post/PostHead'
-import PostContent from '../components/Post/PostContent'
-import CommentWidget from '../components/Post/CommentWidget'
+import PostHead from "../components/Post/PostHead";
+import PostContent from "../components/Post/PostContent";
+import CommentWidget from "../components/Post/CommentWidget";
 
-import Layout from '../components/Layout'
-
-
+import Layout from "../components/Layout";
 
 const Post_template = ({
-    data: {
-        allMarkdownRemark: {edges},
-    },
-    location: {href},
+  data: {
+    allMarkdownRemark: { edges },
+  },
+  location: { href },
 }) => {
-    const {
-        node: {
-          html,
-          frontmatter: {
-            title,
-            summary,
-            date,
-            categories,
-            thumbnail: {
-              childImageSharp: {gatsbyImageData},
-              publicURL,
-            },
-          },
+  const {
+    node: {
+      html,
+      frontmatter: {
+        title,
+        summary,
+        date,
+        categories,
+        thumbnail: {
+          childImageSharp: { gatsbyImageData },
+          publicURL,
         },
-      } = edges[0]
+      },
+    },
+  } = edges[0];
   return (
-    // <Template title={title} description={summary} url={href} image={publicURL}>
     <Layout>
       <PostHead
         title={title}
@@ -41,12 +38,11 @@ const Post_template = ({
       />
       <PostContent html={html} />
       <CommentWidget />
-      </Layout>
-    // </Template>
-  )
-}
+    </Layout>
+  );
+};
 
-export default Post_template
+export default Post_template;
 
 export const queryMarkdownDataBySlug = graphql`
   query queryMarkdownDataBySlug($slug: String) {
@@ -70,4 +66,4 @@ export const queryMarkdownDataBySlug = graphql`
       }
     }
   }
-`
+`;
