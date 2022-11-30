@@ -31,6 +31,7 @@ const defaultStyle = css`
     /* color: inherit; */
     text-decoration: none;
     cursor: pointer;
+    color: inherit;
   }
 `
 

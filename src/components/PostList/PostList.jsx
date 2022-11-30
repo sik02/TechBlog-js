@@ -3,6 +3,8 @@ import styled from "@emotion/styled";
 import { Link } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
 
+import TagList from "../TagList/TagList";
+
 const PostListWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
@@ -139,17 +141,7 @@ const PostList = ({ postList }) => {
                   <Date>{date}</Date>
                 </DateWrapper>
                 <BottomWrapper>
-                  <Category>
-                    {categories.map((category) => (
-                      <CategoryItem
-                        to={`/?category=${category}`}
-                        active={true}
-                        key={category}
-                      >
-                        {category}
-                      </CategoryItem>
-                    ))}
-                  </Category>
+                  <TagList tagList={categories} />
                 </BottomWrapper>
               </PostItemContent>
             </PostItemWrapper>

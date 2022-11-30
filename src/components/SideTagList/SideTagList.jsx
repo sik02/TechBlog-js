@@ -1,4 +1,5 @@
 import React from "react";
+import _ from "lodash";
 import styled from "@emotion/styled";
 import { Link } from "gatsby";
 
@@ -21,25 +22,26 @@ const SideTagListTitle = styled.div`
   color: #fff;
 `;
 
-const TagItem = styled(({ active, ...props }) => <Link {...props} />)`
+const TagItem = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
   color: #fff;
 `;
 
-const SideTagList = ({ selectedCategory, categoryList }) => {
+const SideTagList = ({ tags, postCount }) => {
   return (
     <RelativeWrapper>
       <AsideWrapper>
         <SideTagListTitle>Tag List</SideTagListTitle>
-        {Object.entries(categoryList).map(([name, count]) => (
-          <TagItem
-            to={`/?category=${name}`}
-            active={name === selectedCategory}
-            key={name}
-          >
-            {name} ({count})
+        <TagItem>
+          <Link to="/?category=All">All ({postCount})</Link>
+        </TagItem>
+        {_.map(tags, (tag) => (
+          <TagItem key={tag.fieldValue}>
+            <Link to={`/?category=${tag.fieldValue}`}>
+              {tag.fieldValue} ({tag.totalCount})
+            </Link>
           </TagItem>
         ))}
       </AsideWrapper>

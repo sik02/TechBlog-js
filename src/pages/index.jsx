@@ -9,6 +9,8 @@ import Bio from "../components/Bio/Bio";
 import SideTagList from "../components/SideTagList/SideTagList";
 
 import { graphql } from "gatsby";
+import _ from "lodash"
+
 
 import queryString from "query-string";
 
@@ -16,6 +18,7 @@ import { title, description, siteUrl } from "../../site-meta-config";
 
 const IndexPage = ({ location, data }) => {
   const posts = data.allMarkdownRemark.nodes
+  const tags = _.sortBy(data.allMarkdownRemark.group, ["totalCount"]).reverse()
 
   const parsed = queryString.parse(location.search);
 
@@ -52,17 +55,11 @@ const IndexPage = ({ location, data }) => {
   //   []
   // );
 
-  console.log(posts)
-
   return (
     <Layout>
       <SEO title={title} description={description} url={siteUrl} />
       <Bio profileImage={gatsbyImageData} />
-      {/* <SideTagList
-        selectedCategory={selectedCategory}
-        categoryList={categoryList}
-      /> */}
-      {/* <PostList selectedCategory={selectedCategory} posts={edges} /> */}
+      <SideTagList tags={tags} postCount={posts.length} />
       <PostList postList={posts} />
     </Layout>
   );
@@ -98,6 +95,10 @@ export const getPostList = graphql`
             }
           }
         }
+      }
+      group(field: frontmatter___categories) {
+        fieldValue
+        totalCount
       }
     }
     file(name: { eq: "profile-image" }) {
