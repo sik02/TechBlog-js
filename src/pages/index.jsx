@@ -14,56 +14,56 @@ import queryString from "query-string";
 
 import { title, description, siteUrl } from "../../site-meta-config";
 
-const IndexPage = ({
-  location: { search },
-  data: {
-    allMarkdownRemark: { edges },
-    file: {
-      childImageSharp: { gatsbyImageData },
-    },
-  },
-}) => {
-  const parsed = queryString.parse(search);
+const IndexPage = ({ location, data }) => {
+  const posts = data.allMarkdownRemark.nodes
+
+  const parsed = queryString.parse(location.search);
+
+  const gatsbyImageData = data.file.childImageSharp.gatsbyImageData;
 
   const selectedCategory =
     typeof parsed.category !== "string" || !parsed.category
       ? "All"
       : parsed.category;
 
-  const categoryList = useMemo(
-    () =>
-      edges.reduce(
-        (
-          list,
-          {
-            node: {
-              frontmatter: { categories },
-            },
-          }
-        ) => {
-          categories.forEach((category) => {
-            if (list[category] === undefined) list[category] = 1;
-            else list[category]++;
-          });
+  // const categoryList = useMemo(
+  //   () =>
+  //     data.allMarkdownRemark.nodes.reduce(
+  //       (
+  //         list,
+          
+  //         {
+  //           node: {
+  //             frontmatter: { categories },
+  //           },
+  //         }
+  //       ) => {
+  //         categories.forEach((category) => {
+  //           if (list[category] === undefined) list[category] = 1;
+  //           else list[category]++;
+  //         });
 
-          list["All"]++;
+  //         list["All"]++;
 
-          return list;
-        },
-        { All: 0 }
-      ),
-    []
-  );
+  //         return list;
+  //       },
+  //       { All: 0 }
+  //     ),
+  //   []
+  // );
+
+  console.log(posts)
 
   return (
     <Layout>
       <SEO title={title} description={description} url={siteUrl} />
       <Bio profileImage={gatsbyImageData} />
-      <SideTagList
+      {/* <SideTagList
         selectedCategory={selectedCategory}
         categoryList={categoryList}
-      />
-      <PostList selectedCategory={selectedCategory} posts={edges} />
+      /> */}
+      {/* <PostList selectedCategory={selectedCategory} posts={edges} /> */}
+      <PostList postList={posts} />
     </Layout>
   );
 };
@@ -80,23 +80,21 @@ export const getPostList = graphql`
       }
     }
     allMarkdownRemark(
-      sort: { order: DESC, fields: [frontmatter___date, frontmatter___title] }
+      sort: {order: DESC, fields: [frontmatter___date, frontmatter___title]}
     ) {
-      edges {
-        node {
-          id
-          fields {
-            slug
-          }
-          frontmatter {
-            title
-            summary
-            date(formatString: "YYYY.MM.DD.")
-            categories
-            thumbnail {
-              childImageSharp {
-                gatsbyImageData(width: 768, height: 400)
-              }
+      nodes {
+        id
+        fields {
+          slug
+        }
+        frontmatter {
+          categories
+          date
+          summary
+          title
+          thumbnail {
+            childImageSharp {
+              gatsbyImageData(width: 768, height: 400)
             }
           }
         }
