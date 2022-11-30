@@ -75,7 +75,7 @@ const CategoryItem = styled(({ active, ...props }) => <Link {...props} />)`
   padding: 0.5rem 1rem;
   border-radius: 1rem;
   /* background: #d8d8d8; */
-  background: #000;
+  background: var(--tag-bg);
   font-size: 1rem;
   font-weight: 700;
   color: #fff;

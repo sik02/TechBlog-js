@@ -10,16 +10,14 @@ import SEO from "../components/SEO";
 
 import queryString from "query-string";
 
-
 import { title, description, siteUrl } from "../../site-meta-config";
 
-const Search = ({data, location}) => {
-
-  const search = location.search
+const Search = ({ data, location }) => {
+  const search = location.search;
 
   const parsed = queryString.parse(search);
 
-  const edges = data.allMarkdownRemark.edges
+  const edges = data.allMarkdownRemark.edges;
 
   const selectedCategory =
     typeof parsed.category !== "string" || !parsed.category
@@ -53,10 +51,10 @@ const Search = ({data, location}) => {
   return (
     <Layout>
       <SEO title={title} description={description} url={siteUrl} />
-      <SideTagList
+      {/* <SideTagList
         selectedCategory={selectedCategory}
         categoryList={categoryList}
-      />
+      /> */}
       <PostList selectedCategory={selectedCategory} posts={edges} />
     </Layout>
   );

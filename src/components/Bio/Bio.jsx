@@ -8,8 +8,8 @@ import { FiMail } from "react-icons/fi";
 
 const Background = styled.div`
   width: 100%;
-  background: #35363a;
-  color: #fff;
+  background: var(--main-bg);
+  color: var(--white-text);
 `;
 
 const Wrapper = styled.div`
